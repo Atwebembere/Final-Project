@@ -1,0 +1,935 @@
+---
+title: "Advanced Data Analysis Final Project"
+author: "Raymond Atwebembere"
+date: "`r format(Sys.Date(), '%B %d, %Y')`"
+output: html_document: default
+---
+
+### Is there a relationship between sex and risk of cigarette smoking among nonsmoking participants between 13 and 15 years of age during the 2018 data collection period? A secondary analysis of the Global Youth Tobacco Survey conducted in Uganda.
+
+### Introduction:
+
+Tobacco use is a leading cause of preventable death and disease worldwide. In 2019, an estimated 1 billion people globally used tobacco regularly, with nearly 8 million attributable deaths.1 According to data from the 2023 National Youth Tobacco Survey, 2.80 million middle and high school students reported “current use” of a tobacco product. Youth use of more than one tobacco product (dual use) is also common,2 with smokeless tobacco use at a prevalence of 2.6% and cigarette smoking at 6.0%.3 Tobacco use often starts during adolescence, with most adults who currently smoke tobacco having initiated before age 21.4 Although cigarettes are the most common tobacco product used by youth globally, the product landscape continues to expand, including various combustible, noncombustible, and electronic products.3,5 Despite this decline in cigarette smoking, the prevalence of tobacco use remains relatively high among youth in low- and middle-income countries (LMICs), with current use among students aged 13 to 15 ranging from around 10% to over 30% in some regions.4,6 In Uganda, tobacco use is a major risk factor for NCDs which accounts for 25% of all deaths in the country.6 The prevalence of smoking among youth been reported to range from 11–16%.7 In many low- and middle-income countries (LMICs), boys exhibit higher rates of cigarette smoking compared to girls. For instance, in Indonesia, the 2014 Global Youth Tobacco Survey reported that 36% of boys aged 13 to 15 were current smokers, while the rate for girls was 4%.8 Similarly, in India, the 2019 Global Youth Tobacco Survey found that 2.4% of boys and 0.3% of girls in the same age group were current cigarette smokers. These figures highlight the gender disparity in youth smoking prevalence within these countries.9
+
+Exploring motivations for initiation of smoking among youth is important. There are many factors associated with youth tobacco use, including social, environmental, cognitive, and genetic influences. In addition, the Centers for Disease Control and Prevention in 2012, concluded that tobacco advertising, promotion, and depictions of smoking in movies are causally related to youth tobacco use.10 Adolescent smoking initiation is strongly associated with continued smoking into adulthood and its related health risks.2 Monitoring youth smoking trends is crucial for policy makers to effectively allocate resources for prevention. Key strategies to curb youth tobacco use include federal regulation of tobacco products, raising tobacco prices through excise taxes, implementing smokefree air laws, restricting tobacco advertising, limiting youth access to tobacco, launching public education campaigns, and fully executing comprehensive state and community tobacco control programs.
+
+### Study objectives:
+
+i)  Primary objective: To determine if sex (male or female) is associated with risk of cigarette smoking among non-smoking youth 12 years and older. ii) Secondary objective: To determine if exposure to smoking advertisements is associated with risk of cigarette smoking among non-smoking youth between 13 and 15 years.
+
+### Methods
+
+#### Study Design and Data Source
+
+This cross-sectional study analyzed data from the 2018 Uganda Global Youth Tobacco Survey (GYTS) <https://extranet.who.int/ncdsmicrodata/index.php/catalog/812>, a nationally representative, school-based survey conducted by the World Health Organization (WHO) and the Centers for Disease Control and Prevention (CDC) 1. The GYTS aims to monitor tobacco use among youth and to inform the implementation and evaluation of tobacco prevention and control programs. The survey employs a standardized, self-administered questionnaire and utilizes a two-stage cluster sampling design to produce representative samples of students aged 13–15 years.
+
+The 2018 Uganda GYTS was conducted to provide updated insights into tobacco use among Ugandan youth. By focusing on data from 2018, we ensured that our analysis reflects the most recent trends and patterns in tobacco use, enhancing the relevance of our findings for current public health strategies.
+
+### Study Population
+
+Participants were recruited from schools across various regions in Uganda. In the first stage of sampling, schools were selected with probability proportional to their enrollment size, ensuring representation from different regions and school types (public and private). In the second stage, classes within selected schools were randomly chosen, and all students in the selected classes were eligible to participate. This method provided a nationally representative sample of students in grades corresponding to ages 13–15 years.
+
+In this study:
+
+The inclusion criteria were: i) Students aged 13 to 15 years. ii) Students with no history of cigarette smoking.
+
+Exclusion criteria included: Missing data on key variables assessing the risk of tobacco use: i) CR39: "If one of your best friends offered you a tobacco product, would you use it?" ii) CR40: "At any time during the next 12 months, do you think you will use any form of tobacco?"
+
+### Variables
+
+The independent variable in this study was sex (CR2), labeled as "Sex" and recoded as 0 for male and 1 for female. The dependent variables were the risk of tobacco use if offered by a friend (CR39) and the risk of tobacco use in the next 12 months (CR40). For both dependent variables, responses were recoded as 0 for "Definitely not," 1 for "Probably not," 2 for "Probably yes," and 3 for "Definitely yes."
+
+Adjustment variables included age (CR1), which was recoded into categories from 0 (12 years) to 5 (17 years and older). Class level (UGR3) was categorized from 0 (Primary 7) to 3 (Senior 3). Allowance (UGR4) was recoded with 0 representing "Usually don't have any spending money," 1 as "Less than Ushs 10,000," 2 as "Ushs 10,001–20,000," 3 as "Ushs 20,001–50,000," and 4 as "Ushs 50,001 and above." The variable "Friends Who Smoke" (OR46) was recoded as 0 for "None of them," 1 for "Some of them," 2 for "Most of them," and 3 for "All of them." Exposure to anti-smoking advertisements (CR30) and exposure to pro-smoking content (CR34) were both recoded as 0 for "No" and 1 for "Yes." A Directed Acyclic Graph (DAG) illustrating the hypothesized relationships among variables is provided in Figure 1 (see Appendix).
+
+### Data Collection Procedures
+
+Data were collected using anonymous, standardized questionnaires administered in classroom settings under the supervision of trained survey administrators. Participation was voluntary, and informed consent was obtained from both students and their guardians according to Ugandan regulations. The questionnaire covered various aspects of tobacco use, exposure to pro- and anti-tobacco messaging, and socio-demographic information.
+
+### Ethical Considerations
+
+The 2018 Uganda GYTS obtained ethical approval from the Uganda National Council for Science and Technology and the Ministry of Education and Sports. Permission was also granted by school authorities, and confidentiality was assured by not collecting any personally identifiable information. As this study involved secondary analysis of existing anonymous data, additional ethical approval was not required.
+
+### Reproducibility Plan
+
+To ensure the reproducibility of our findings, we meticulously documented all methodologies, including data cleaning processes and analytical techniques. All data files used in the analysis, along with the final cleaned dataset, are publicly available in a secure GitHub repository (link to be provided upon publication), including both the original and processed data.
+
+The full code used for data cleaning, transformation, and analysis is shared, encompassing all R scripts with detailed annotations for each step. A README file is included in the repository, providing instructions on how to run the analysis code and specifying any system dependencies or packages required to reproduce the results.
+
+We maintained a well-structured workflow for data analysis, ensuring that each step—from raw data import to final analysis—is preserved and documented. Input and output files are clearly labeled, and relative paths are used within scripts to facilitate reproducibility. All steps for transforming and cleaning raw data are explicitly reported, including decisions regarding outlier handling, exclusions, or data imputation.
+
+We adhered to the STROBE reporting guidelines to ensure that the presentation of results is clear, standardized, and reproducible.
+
+### Procedures:
+
+In this study, we conducted a secondary analysis of data from the 2018 Uganda Global Youth Tobacco Survey (GYTS), a nationally representative, school-based survey carried out by the World Health Organization (WHO) and the Centers for Disease Control and Prevention (CDC) 1. The original data were collected between March and June 2018 by trained survey administrators from the Uganda Ministry of Health and the Ministry of Education and Sports. These administrators utilized standardized, self-administered questionnaires to gather information on tobacco use, exposure to tobacco-related content, and socio-demographic characteristics among students aged 13–15 years. For our analysis, we focused on variables pertinent to assessing the susceptibility to tobacco use among nonsmoking youth in Uganda, ensuring a diverse and representative sample by including responses from students across various regions.
+
+The independent variable in our study was sex (CR2), which participants self-reported by selecting either "Male" or "Female" on the questionnaire; no additional gender options were provided. This variable was labeled as "Sex" and coded as 0 for male and 1 for female in our analysis. The dependent variables were the risk of tobacco use if offered by a friend (CR39) and the risk of tobacco use in the next 12 months (CR40). The first was assessed by asking, "If one of your best friends offered you a tobacco product, would you use it?" and the second by, "At any time during the next 12 months, do you think you will use any form of tobacco?" Responses to both questions were coded as 0 for "Definitely not," 1 for "Probably not," 2 for "Probably yes," and 3 for "Definitely yes."
+
+Adjustment variables included age (CR1), class level (UGR3), allowance (UGR4), friends who smoke (OR46), exposure to anti-smoking advertisements (CR30), and exposure to pro-smoking content (CR34). Age was self-reported and categorized for analysis into 0 (12 years), 1 (13 years), 2 (14 years), 3 (15 years), 4 (16 years), and 5 (17 years and older). Class level indicated the current grade of the student: 0 for Primary 7, 1 for Senior 1, 2 for Senior 2, and 3 for Senior 3. Allowance represented the amount of spending money the student usually had, coded as 0 ("Usually don't have any spending money"), 1 ("Less than Ushs 10,000"), 2 ("Ushs 10,001–20,000"), 3 ("Ushs 20,001–50,000"), and 4 ("Ushs 50,001 and above"). The variable "Friends Who Smoke" assessed how many of the student's close friends smoked tobacco, coded from 0 ("None of them") to 3 ("All of them"). Exposure to anti-smoking advertisements was determined by asking, "During the past 30 days, have you seen or heard any anti-smoking media messages?" (CR30), and exposure to pro-smoking content by, "During the past 30 days, have you seen any people using tobacco on TV, videos, or movies?" (CR34); both were coded as 0 for "No" and 1 for "Yes."
+
+All variables were sourced directly from the GYTS dataset, which was collected using standardized and validated questionnaires. Since we performed a secondary analysis, we relied on the data collection methods and procedures implemented by the original GYTS study. The consistency in data collection across participants enhances the comparability and reliability of our analysis.
+
+To address potential sources of bias, we utilized the nationally representative nature of the GYTS dataset, which minimized selection bias through its two-stage cluster sampling design that accurately reflects the target population of Ugandan students aged 13–15 years. Measurement bias was reduced by the use of validated questionnaires administered uniformly across all participants, ensuring that any observed differences were due to actual variations rather than inconsistencies in data collection. We identified potential confounders such as age, class level, allowance, friends who smoke, and exposure to tobacco-related content, including these variables in our analysis to adjust for their potential influence on the relationship between sex and the risk of tobacco use. Participants with missing data on key variables (CR39 and CR40) were excluded from the analysis to prevent bias arising from incomplete information.
+
+As we conducted a secondary analysis of de-identified, publicly available data, additional ethical approval was not required. The original 2018 Uganda GYTS obtained ethical approvals from the Uganda National Council for Science and Technology and the Ministry of Education and Sports. Informed consent was obtained from both students and their guardians during the original data collection, and confidentiality was maintained by not collecting any personally identifiable information.
+
+### Outcomes
+
+The primary outcomes of this study were two measures of susceptibility to tobacco use among nonsmoking students aged 12 years and older in Uganda. The first outcome, Risk of Tobacco Use 1, was assessed using the question: "If one of your best friends offered you a tobacco product, would you use it?" (CR39), with responses recorded on a four-point Likert scale ranging from 0 ("Definitely not") to 3 ("Definitely yes"). The second outcome, Risk of Tobacco Use 2, evaluated the anticipated likelihood of tobacco use in the near future by asking: "At any time during the next 12 months, do you think you will use any form of tobacco?" (CR40), coded identically to the first outcome. These outcomes were measured in all participants who met the inclusion criteria of being nonsmokers aged 12 years and older with complete data on the outcome variables. By focusing on these measures, we aimed to understand both the immediate susceptibility to peer influence and the short-term risk of initiating tobacco use among nonsmoking Ugandan youth.
+
+### Statistical Analysis
+
+All statistical analyses were performed using R software version 4.4.1. To address both the primary and secondary objectives, we employed multinomial logistic regression models. This approach is appropriate because the dependent variables, Risk of Tobacco Use 1 and Risk of Tobacco Use 2, are non-hierarchical categorical outcomes with more than two categories that do not have a natural order. Multinomial regression allows for the estimation of odds ratios (ORs) for each category relative to a reference category.
+
+The primary analysis examined the association between the independent variable, sex, and the two risk outcomes. We controlled for potential confounding variables identified through a thorough literature review. The confounders included:
+
+Age: Categorized into six groups (12 years to 17 years and older). Class Level: Current grade level of the student (Primary 7 to Senior 3). Allowance: Amount of spending money (ranging from "Usually don't have any spending money" to "Ushs 50,001 and above"). Friends Who Smoke: Number of close friends who smoke tobacco. Exposure to Pro-Smoking Content: Whether the student has seen people using tobacco in media. Exposure to Anti-Smoking Advertisements: Whether the student has seen or heard anti-smoking messages. By including these confounders in the models, we aimed to adjust for their potential influence on the relationship between sex and the risk of tobacco use.
+
+#### Handling of Quantitative Variables
+
+Quantitative variables like age and allowance were categorized to facilitate interpretation and to reflect meaningful groupings relevant to the study population. The categories were chosen based on developmental stages for age and economic thresholds common in Uganda for allowance.
+
+#### Multinomial Regression Models
+
+For each dependent variable, we fitted a multinomial logistic regression model using the nnet package in R. The models estimated adjusted odds ratios (AORs) and 95% confidence intervals (CIs) for the association between each predictor and the risk outcomes, relative to the reference category (usually the lowest risk category).
+
+#### Secondary Analyses
+
+Secondary analyses were conducted to explore the associations between the risk outcomes and other predictor variables, such as age, allowance, exposure to pro-smoking content, and exposure to anti-smoking advertisements. Separate multinomial logistic regression models were constructed for each secondary predictor, adjusting for the same set of confounders.
+
+#### Control for Confounding
+
+All models included the identified confounders to control for their potential impact on the associations of interest. This approach allowed us to isolate the effect of each predictor variable on the risk of tobacco use while accounting for other influencing factors.
+
+#### Handling of Missing Data
+
+Missing data were addressed using multiple imputation by chained equations (MICE) with the mice package in R. This method creates multiple complete datasets by imputing missing values based on the relationships observed in the data. Ten imputed datasets were generated, and the results from analyses on these datasets were combined using Rubin's rules to account for the uncertainty introduced by the imputations. This approach ensures that all observations are included in the analysis, reducing potential bias due to missing data.
+
+#### Accounting for Sampling Strategy
+
+The complex sampling design of the GYTS was accounted for by incorporating survey weights, stratification, and clustering in all analyses. The survey package in R was used to specify the survey design with the svydesign function, ensuring that estimates are representative of the national student population and that standard errors reflect the survey design.
+
+#### Statistical Significance
+
+All statistical tests were two-sided, and a p-value of less than 0.05 was considered statistically significant. Confidence intervals were calculated at the 95% level. The analyses accounted for the complex survey design and the use of multiple imputation.
+
+#### Sample Size Determination
+
+As this study was a secondary analysis of the existing 2018 Uganda GYTS dataset, the sample size was determined by the number of participants who met the inclusion criteria after accounting for missing data. The final analytical sample included all nonsmoking students aged 12 years and older with complete or imputed data on the variables of interest.
+
+#### Software and Packages Used
+
+R software version 4.4.1; nnet package for multinomial logistic regression; mice package for multiple imputation; survey package for analyzing complex survey data.
+
+#### Sensitivity Analyses
+
+To assess the robustness of our findings, we conducted sensitivity analyses:
+
+Complete Case Analysis: We compared the results from the multiple imputation analysis with those from a complete case analysis (excluding participants with missing data) to evaluate the impact of missing data on the estimates. Alternative Modeling Approaches: We tested the proportional odds assumption inherent in ordinal logistic regression models. If the assumption was violated, multinomial logistic regression was deemed more appropriate. Interaction Terms: We examined interaction effects between sex and other predictor variables to explore potential effect modification. By following this analytical approach, we aimed to provide valid and generalizable findings on factors associated with susceptibility to tobacco use among nonsmoking youth in Uganda.
+
+### Role of the funding source
+
+• Include standard statement (if funder had no role in study) or amend as necessary: “The funder of the study had no role in study design, data collection, data analysis, data interpretation, or writing of the report.” • If the study had no funder, state: “There was no funding source for this study”.
+
+"This paper uses data from the Global Youth Tobacco Survey (GYTS). GYTS is supported by the World Health Organization and the US Centers for Disease Control and Prevention." (citation)
+
+### Disclaimer
+
+The data is being distributed without warranty of any kind. The responsibility for the use of the data lies with the user. In no event shall the World Health Organization be liable for damages arising from its use.
+
+### Data Management
+
+```{r}
+## Installing havena and tidyverse packages and libraries:
+pacman::p_load(haven,readr, tidyverse, naniar, VIM, mice, lattice, table1, DiagrammeR, rsvg, dplyr, car)
+
+##Loading dataset
+
+Tobacco <- read_csv('UGANDA_DATA_18.csv')
+
+##Subsetting dataset to use variables of interest
+
+Tobacco_data <-Tobacco %>%
+  dplyr::select(CR1, CR2, UGR3, UGR4, CR5, CR9, CR30, CR39, CR40, OR45, OR46, CR34)
+colnames(Tobacco_data)
+
+##Renaming columns
+names(Tobacco_data)[1:12] <- c(
+  "Age", "Sex", "Class", "Allowance", 
+  "Smokingstatuscigarettes", "Smokingtobaccoother", 
+  "Seenantismokingad", "Riskoftobaccouse1", "Riskoftobaccouse2", 
+  "Parentwhosmoke", "Friendwhosmokes", "Seenprosmokingcontent"
+)
+colnames(Tobacco_data)
+
+##Understanding the type of variables in the dataset
+sapply(Tobacco_data, typeof)
+
+```
+
+## 6. Sub-setting Data:
+
+### a. Exclude participants that reported yes to smoking.
+
+```{r}
+
+#Filtering data to exclude participants that reported yes to smoking any tobacco product
+
+# Filter out participants who smoke cigarettes or other tobacco products and remove missing values
+Tobacco_data1 <- Tobacco_data %>%
+  filter(Smokingstatuscigarettes == 2 & Smokingtobaccoother == 2 & 
+         !is.na(Smokingstatuscigarettes) & !is.na(Smokingtobaccoother)) 
+
+# Calculate the number of excluded rows
+ex1 <- nrow(Tobacco_data) - nrow(Tobacco_data1)
+
+# Output the number of excluded rows
+ex1 
+
+# Verify the remaining dataset
+table(Tobacco_data1$Smokingstatuscigarettes, Tobacco_data1$Smokingtobaccoother)
+
+```
+
+### b. Exclude participants that are below 12 years
+
+```{r}
+# Filter the data to include only participants aged 13 to 15 years
+Tobacco_data2 <- Tobacco_data1 %>%
+  filter(Age %in% c(3, 4, 5))
+
+# Calculate the number of excluded observations
+
+ex2 <- nrow(Tobacco_data1) - nrow(Tobacco_data2)
+
+ex2 # Output the number of excluded rows
+
+table (Tobacco_data2$Age)
+
+```
+### c. Exclude participants with missing data on "Risk of tobacco use 1 and Risk of tobacco use 2"
+
+```{r}
+
+# Exclude participants with missing data on both 'Risk of tobacco use 1' and 'Risk of tobacco use 2'
+Tobacco_data3 <- Tobacco_data2 %>%
+  filter(!is.na(Riskoftobaccouse1) & !is.na(Riskoftobaccouse2))
+
+# Calculate how many participants were excluded
+ex3 <- nrow(Tobacco_data2) - nrow(Tobacco_data3)
+
+ex3 # Output the number of excluded rows
+
+#Ensuring all Na's from risk of tobacco use are eliminated
+
+sum(is.na(Tobacco_data3$Riskoftobaccouse1))
+sum(is.na(Tobacco_data3$Riskoftobaccouse2))
+
+##Subsetting dataset to use variables of interest
+
+Tobacco_data4 <-Tobacco_data3 %>%
+  dplyr::select("Age", "Sex", "Riskoftobaccouse1", "Riskoftobaccouse2", "Class", "Allowance", "Friendwhosmokes", "Seenantismokingad", "Seenprosmokingcontent", "Parentwhosmoke")
+colnames(Tobacco_data2)
+```
+
+## 7. Figure 1:
+
+```{r}
+
+figure1 <- grViz(diagram = "digraph flowchart{ # gives beginning of flowchart
+
+      # node definitions with substituted label text
+      
+      node [fontname = Helvetica, shape = rectangle, fontsize=10] 
+      
+      # Define the nodes: nodes indicate how many boxes you will have in your diagram. Since I have three sets of exclusions, I will have four nodes.
+      
+      node1 [label = '@@1'] # starting number
+      node2 [label = '@@2'] # number after exclusion 1
+      node3 [label = '@@3'] # number after exclusion 2
+      node4 [label = '@@4'] # number after exclusion 3
+      
+      # edge definitions with the node IDs are used to indicate how the rectangle boxes flow from each other. 
+      
+      node1 -> node2 -> node3 -> node4
+}
+      # This set of code provides the text in each rectangle box.
+      [1]: 'Records received from GYTSAFRO2018 Uganda All Schools n = 3,458'
+      [2]: 'Excluding 927 participants that reported yes to smoking n = 2,531'
+      [3]: 'Excluding 978 participants that are below 13 years and above 15 years n = 1,553'
+      [4]: 'Excluding 26 participants with missing data on `Risk of tobacco use 1 and Risk of tobacco use 2` n = 1,527'
+      ")
+figure1
+
+# exporting figure
+
+figure1 %>%
+  DiagrammeRsvg::export_svg() %>% 
+  charToRaw() %>% 
+  rsvg::rsvg_pdf("Figure 1.pdf")
+
+```
+
+## 8. Relabling variable responses using the numeric and factor funtions:
+
+\*\*\* First convert to numeric to set the reference level, the factor to relabel the variables
+
+```{r}
+
+# Sex - change it to numeric, set female as reference
+Tobacco_data4 <- Tobacco_data4 %>% 
+  mutate(Sex = case_when(Sex== "2" ~ 0,
+                             Sex== "1" ~ 1
+                             ))
+Tobacco_data4$Sex <- factor(Tobacco_data4$Sex, levels = c(0:1), labels = c("F", "M")) # make it a factor and give factor labels of F for female and M for male
+
+# Recode 'Age' into 0, 1, 2 using case_when
+Tobacco_data4 <- Tobacco_data4 %>%
+  mutate(
+    Age = case_when(
+      Age == 3 ~ 0,  # 13 years old
+      Age == 4 ~ 1,  # 14 years old
+      Age == 5 ~ 2   # 15 years old
+    ))
+
+# Convert 'Age' to a factor with labels
+Tobacco_data4$Age <- factor(
+  Tobacco_data4$Age,
+  levels = c(2, 1, 0),
+  labels = c("15 years", "13 years", "14 years")) # make it a factor and give factor labels
+
+# Riskoftobaccouse1 - change it to numeric. Collapse categories set "No" as reference
+Tobacco_data4 <- Tobacco_data4 %>%
+  mutate(Riskoftobaccouse1 = case_when(
+    Riskoftobaccouse1 %in% c("1", "2") ~ 0,  # "Definitely not" and "Probably not" become 0
+    Riskoftobaccouse1 %in% c("3", "4") ~ 1   # "Probably yes" and "Definitely yes" become 1
+  ))
+ # Convert to factor with labels "No" and "Yes"
+Tobacco_data4$Riskoftobaccouse1 <- factor(Tobacco_data4$Riskoftobaccouse1,
+                                          levels = c(0, 1),
+                                          labels = c("No", "Yes"))
+
+# Riskoftobaccouse2 - change it to numeric. Collapse categories set "No" as reference
+Tobacco_data4 <- Tobacco_data4 %>%
+  mutate(Riskoftobaccouse2 = case_when(
+    Riskoftobaccouse2 %in% c("1", "2") ~ 0,  # "Definitely not" and "Probably not" become 0
+    Riskoftobaccouse2 %in% c("3", "4") ~ 1   # "Probably yes" and "Definitely yes" become 1
+  ))
+ # Convert to factor with labels "No" and "Yes"
+Tobacco_data4$Riskoftobaccouse2 <- factor(Tobacco_data4$Riskoftobaccouse2,
+                                          levels = c(0, 1),
+                                          labels = c("No", "Yes"))
+
+
+# Parentwhosmoke - change it to numeric. Collapse categories set "No" as reference
+
+
+Tobacco_data4 <- Tobacco_data4 %>%
+  mutate(Parentwhosmoke = case_when(
+    Parentwhosmoke %in% c("1", "5") ~ 0,  # "None" and "I don't know" become 0
+    Parentwhosmoke %in% c("2", "3", "4") ~ 1   # "Both", "Father only", and "Mother only" become 1
+  ))
+ # Convert to factor with labels "No" and "Yes"
+Tobacco_data4$Parentwhosmoke <- factor(Tobacco_data4$Parentwhosmoke,
+                                          levels = c(0, 1),
+                                          labels = c("No", "Yes"))
+
+#   Class - change it to numeric, set "Primary 7" as reference
+Tobacco_data4 <- Tobacco_data4 %>%
+  mutate(Class = case_when(Class=="4" ~ 0,
+                              Class=="1" ~ 1,
+                              Class=="2" ~ 2,
+                              Class=="3" ~ 3
+                              )) 
+Tobacco_data4$Class <- factor(Tobacco_data4$Class, levels = c(0:3), labels = c("Senior 3", "Primary 7", "Senior 1", "Senior 2")) # make it a factor and give factor labels for Class
+
+# Allowance - change it to numeric, set "Usually don't have any spending money" as reference
+Tobacco_data4 <- Tobacco_data4 %>%
+  mutate(Allowance = case_when(
+    Allowance == "7" ~ 0,
+    Allowance %in% c("1", "2") ~ 1,
+    Allowance %in% c("3", "4") ~ 2,
+    Allowance %in% c("5", "6") ~ 3
+  ))
+
+# Convert Allowance to a factor with the specified reference level
+Tobacco_data4$Allowance <- factor(Tobacco_data4$Allowance, 
+                                  levels = c(0, 1, 2, 3), 
+                                  labels = c("Ushs.50,001 and above", 
+                                             "Less than Ushs.2,000", 
+                                             "Ushs.2,000-10,000", 
+                                             "Ushs 10,001-50,000"))
+
+# Convert Friendwhosmokes to a factor with the specified reference level
+Tobacco_data4 <- Tobacco_data4 %>%
+  mutate(Friendwhosmokes = case_when(
+      Friendwhosmokes == "1" ~ 0,
+      Friendwhosmokes %in% c("2", "3", "4") ~ 1))
+
+# Convert to factor with levels 0 and 1 labeled as "No" and "Yes"
+Tobacco_data4$Friendwhosmokes <- factor(Tobacco_data4$Friendwhosmokes, levels = c(0, 1), labels = c("No", "Yes"))
+
+# Seensmokingadvertisement - change it to numeric, set "No" as reference
+Tobacco_data4 <- Tobacco_data4 %>% 
+  mutate(Seenantismokingad = case_when(Seenantismokingad== "2" ~ 0,
+                             Seenantismokingad== "1" ~ 1
+                             ))
+Tobacco_data4$Seenantismokingad <- factor(Tobacco_data4$Seenantismokingad, levels = c(0:1), labels = c("No", "Yes")) # make it a factor and give it factor labels.
+
+# Seenprosmokingcontent - change it to numeric, set "No" as reference
+Tobacco_data4 <- Tobacco_data4 %>% 
+  mutate(Seenprosmokingcontent = case_when(Seenprosmokingcontent== "2" ~ 0,
+                             Seenprosmokingcontent== "1" ~ 1
+                             ))
+Tobacco_data4$Seenprosmokingcontent <- factor(Tobacco_data4$Seenprosmokingcontent, levels = c(0:1), labels = c("No", "Yes")) # make it a factor and give it factor labels.
+
+head(Tobacco_data4)
+
+
+```
+
+## 9. Imputing for missing data
+
+```{r}
+Tobacco_data4 # a dataset from GYTS of 1,527 observations containing "Age", "Sex", "Riskoftobaccouse1", "Riskoftobaccouse2", "Class", "Allowance", "Friendwhosmokes", "Seenantismokingad" ,"Seenprosmokingcontent", "Parentwhosmoke", 
+View(Tobacco_data4)
+summary(Tobacco_data4)
+```
+
+### 9.a Look at missing data patterns using the md.pattern function
+
+```{r}
+md.pattern(Tobacco_data4, rotate.names=TRUE)
+# blue = not missing, red = missing
+# The numbers in the left column are the number of observations with each pattern
+# The numbers in the right column are the numbers of variables missing for that pattern
+# The number in the bottom row is the number of observations with missing values for the variable indicated in the top row
+# The number in the bottom right corner is the total number of missing values in the dataset
+
+# 1297/1297 rows (i.e., observations) are complete, as indicated by all blue cells in the first row
+# 367/1297 rows have missing data on Seenprosmokingcontent
+# 323/1297 rows have missing data on Seenantismokingad
+# 27/1297 rows have missing data on Class
+# 5/1297 rows have missing data on Sex
+# 5/1297 rows have missing data on Allowance
+# 3/1297 rows have missing data on Friendwhosmokes
+
+# There are a total of 11 missing data patterns in the dataset
+
+# Analytic Dataframe
+```
+
+### 9.b We can also look at missing data for pairs of variables using the md.pairs function in the MICE package, which could inform correlations between variables in missingness
+
+-   Four patterns are present
+
+    -   rr: values for both variables are present and accounted for (rr = response-response)
+    -   rm: values for the first variable are available and the second variable are missing (rm = response-missing)
+    -   mr: values for the first variable are missing and the second variable is available (mr = missing-response)
+    -   mm: values for both variables are missing (mm = missing-missing)
+
+    ```{r}
+    md.pairs(Tobacco_data4)
+
+       # rr (Response-Response)
+# The rr matrix records cases where both variables have values present:
+
+# Row 1 (Age):
+# 1650 observations have values for both Age and Sex.
+# 1645 observations have values for both Age and Class.
+# 1623 observations have values for both Age and Seenantismokingad.
+
+# Row 2 (Sex):
+# 1645 observations have values for both Sex and Class.
+# 1642 observations have values for both Sex and Friendwhosmokes.
+# 1327 observations have values for both Sex and Seenprosmokingcontent.
+
+## rm (Response-Missing)
+# The rm matrix tracks cases where the first variable has a value, but the second variable is missing:
+
+# Row 1 (Age):
+# 5 observations have values for Age but are missing for Sex.
+# 27 observations have values for Age but are missing for Seenprosmokingcontent.
+# 4 observations have values for Age but are missing for Allowance.
+
+# Row 2 (Sex):
+# 5 observations have values for Sex but are missing for Allowance.
+# 3 observations have values for Sex but are missing for Friendwhosmokes.
+# 27 observations have values for Sex but are missing for Seenprosmokingcontent.
+
+## mr (Missing-Response)
+# The mr matrix captures cases where the first variable is missing but the second variable has a value:
+
+# Row 1 (Age):
+# 5 observations are missing values for Age but have responses for Smokingstatus.
+# 3 observations are missing values for Age but have responses for Friendwhosmokes.
+
+# Row 2 (Sex):
+# 9 observations are missing for Sex but have responses for Smokingstatus.
+# 8 observations are missing for Sex but have responses for Allowance.
+# 27 observations are missing for Sex but have responses for Seenprosmokingcontent.
+
+## mm (Missing-Missing)
+# The mm matrix shows cases where both variables are missing:
+
+# Row 1 (Age):
+# No observations are missing both Age and other variables, suggesting that Age data is almost complete.
+
+# Row 2 (Sex):
+# 3 observations are missing for both Sex and Class.
+# 4 observations are missing for both Class and Allowance.
+# 27 observations are missing for both Seenprosmokingcontent and Seenantismokingad.
+
+    ```
+
+### 9.c Create margin plot (VIM package) to see how missing values on one variable relate to values on another variable. We will do this for cholesterol (chl) and bmi
+
+We will create margin plots using the VIM package to explore how missing values on one variable relate to values on another variable. In this case, we’ll examine the relationships between Sex and Riskoftobaccouse1, and Sex and Riskoftobaccouse2.
+
+\*\*\* Setting up the Plot Arguments
+
+The first argument specifies the dataset, selecting all rows and the columns Sex and Riskoftobaccouse1 or Sex and Riskoftobaccouse2 for examination in the margin plot.
+The col argument defines the colors used in the plot:
+Blue: Observations with no missing data for both variables.
+Red: Observations with missing data on one of the variables.
+Orange: Observations missing data on both variables.
+cex controls the size of the points, cex.lab adjusts the axis label size, cex.numbers sets the size of the displayed counts, and pch defines the symbol for the points.
+
+\*\*\* Interpretation of the Plots
+
+\*\*\* Plot 1: Sex and Riskoftobaccouse1
+
+Blue Dots: Represent cases where both Sex and Riskoftobaccouse1 have observed values. There are several blue dots along the horizontal and vertical scatterplot areas, indicating records with complete data for both variables.
+
+Red Dots on Axes:
+
+Red dots along the vertical axis indicate cases where Riskoftobaccouse1 is observed, but Sex is missing.
+Red dots along the horizontal axis represent cases where Sex is observed, but Riskoftobaccouse1 is missing.
+In this plot, there are five red dots on the vertical axis and three red dots on the horizontal axis, indicating partial missing data for these variables.
+
+Orange Indicator (0): The orange "0" signifies that there are no records where both Sex and Riskoftobaccouse1 are missing simultaneously.
+
+Red Numbers:
+
+The red 5 on the bottom axis represents the total records missing Sex.
+The red 9 on the left axis shows the total records missing Riskoftobaccouse1.
+
+Boxplots (Blue and Red):
+
+Blue boxplots along each axis display the distribution of Sex and Riskoftobaccouse1 for cases with no missing data.
+Red boxplots show the distribution of each variable when the other variable is missing.
+
+\*\*\* Plot 2: Sex and Riskoftobaccouse2
+
+Blue Dots: Represent cases where both Sex and Riskoftobaccouse2 have observed values. Similar to the first plot, there are several blue dots indicating complete data for these variables.
+
+Red Dots on Axes:
+
+Red dots on the vertical axis show cases where Riskoftobaccouse2 is observed, but Sex is missing.
+Red dots on the horizontal axis indicate cases where Sex is observed, but Riskoftobaccouse2 is missing.
+This plot also has five red dots on the vertical axis and three red dots on the horizontal axis, similar to the first plot.
+Orange Indicator (0): The orange "0" signifies that there are no cases with both Sex and Riskoftobaccouse2 missing simultaneously.
+
+Red Numbers:
+
+The red 5 on the bottom axis represents the total records missing Sex.
+The red 9 on the left axis indicates the total records missing Riskoftobaccouse2.
+
+Boxplots (Blue and Red):
+
+The blue boxplots show the distribution of Sex and Riskoftobaccouse2 for cases with complete data.
+The red boxplots show the distribution of each variable when the other variable is missing.
+
+```{r}
+
+marginplot(Tobacco_data4 %>% dplyr::select(Sex, Riskoftobaccouse1), col=c("blue","red","orange"), cex=1, cex.lab=1, cex.numbers=0.7, pch=20)
+marginplot(Tobacco_data4 %>% dplyr::select(Sex, Riskoftobaccouse2), col=c("blue","red","orange"), cex=1, cex.lab=1, cex.numbers=0.7, pch=20)
+```
+
+### 9.d Look at the distribution of one variable according to missing non-missing status for another variable using pbox (VIM package)
+
+pbox Overview: The pbox function provides box plots of a variable based on whether data for a second variable is missing or observed. Here, we examine how Riskoftobaccouse1 and Riskoftobaccouse2 scores vary according to the missing and non-missing status of Sex, Class, and Allowance.
+
+Riskoftobaccouse1: The pbox plot visualizes Riskoftobaccouse1 scores, categorized by missing/non-missing data in Sex, Class, and Allowance.
+
+Observed vs. Missing in Sex: The distribution of Riskoftobaccouse1 scores varies between observed and missing values for Sex.
+When Sex data is missing, Riskoftobaccouse1 scores show greater variability, suggesting that records with missing Sex data have a wider range of risk scores.
+
+Observed vs. Missing in Class: There is little difference in Riskoftobaccouse1 scores between observed and missing values for Class.
+This suggests that missing values in Class do not significantly affect Riskoftobaccouse1 variability.
+
+Observed vs. Missing in Allowance: There is a notable difference in Riskoftobaccouse1 scores for missing vs. observed values in Allowance.
+Missing data in Allowance corresponds with increased variability in Riskoftobaccouse1 scores, indicating a possible association between missing Allowance data and diverse risk levels.
+
+Riskoftobaccouse2: The pbox plot for Riskoftobaccouse2 provides insights based on the missing and non-missing status of Sex, Class, and Allowance.
+
+Observed vs. Missing in Sex: Similar to Riskoftobaccouse1, when Sex data is missing, Riskoftobaccouse2 scores show higher variability.
+This suggests an association between missing Sex data and a range of risk levels for future tobacco use.
+
+Observed vs. Missing in Class: As seen with Riskoftobaccouse1, there is minimal difference in Riskoftobaccouse2 scores between observed and missing values in Class.
+This pattern implies that missing Class data may not be strongly related to differences in Riskoftobaccouse2.
+
+Observed vs. Missing in Allowance: Missing data in Allowance corresponds with a wider range of Riskoftobaccouse2 scores.
+This pattern mirrors Riskoftobaccouse1, where missing Allowance data suggests higher variability in risk perceptions, possibly indicating a connection between missing Allowance and diverse tobacco use risks.
+```{r}
+
+pbox(Tobacco_data4, pos=4) # 4 is the column index (the number of the column from left to right)
+
+pbox(Tobacco_data4, pos=5) # 5 is the column index (the number of the column from left to right)
+```
+
+### 9.e Imputing data with the mice function from the MICE package.
+
+-   the first argument is the data frame
+-   m = number of imputations
+-   Maxit is the number of iterations to get the imputation model to converge.
+-   The seed is needed so you get the same set of imputed data each time you run the code.
+
+```{r}
+# Impute all missing values in the dataset without specifying a formula
+imp <- mice(Tobacco_data4, m = 10, maxit = 5, seed = 1000000)
+imp
+```
+
+## 9.f Let's look at the meaning of the output
+
+-   Iter is the iteration number for the model that is predicting a value for each of the missing data points. The default is 5.
+-   Imp is the imputation number. By default, you get 5 imputed values (1 per imputed dataframe) for each missing value.
+-   mids are the imputation datasets
+
+```{r}
+class(imp)
+```
+
+## 9.g Diagnostics for imputation model: Are the imputed values plausible?
+
+```{r}
+# check Age
+imp$imp$Age # imp$imp refers to the list that holds the dataframe with the imputed values for each variable (both called imp) (Age, Sex, Riskoftobaccouse1, Riskoftobaccouse2, Class, Friendwhosmokes, Seenantismokingad, Seenprosmokingcontent). To view this click on imp in your global environment
+
+# check Sex
+imp$imp$Sex
+
+# check Riskoftobaccouse1
+imp$imp$Riskoftobaccouse1
+
+# check Riskoftobaccouse2
+imp$imp$Riskoftobaccouse2
+
+# check Class
+imp$imp$Class
+
+# check Parentwhosmoke
+imp$imp$Parentwhosmoke
+
+# check Seenantismokingad
+imp$imp$Seenantismokingad
+
+# check Seenprosmokingcontent
+imp$imp$Seenprosmokingcontent
+
+# check Allowance.
+imp$imp$Allowance
+
+# check Friendwhosmokes
+imp$imp$Friendwhosmokes
+
+# the rows contain the imputed values and the columns are the multiple imputations
+```
+
+## 9.h Obtain the first complete dataset in a normal dataframe for review using the complete function from the mice package
+
+```{r}
+imp1 <- mice::complete(data=imp, action=1) # action gives the imputation number you want. In this case the first imputation
+imp1
+
+longimp <- mice::complete(data=imp, action="long") # To get all the imputations in one dataframe provide the action "long". Two columns are added: 1) .imp, integer, referring the imputation number, and 2) .id, integer, the id number in the original dataframe;
+
+longimp
+```
+
+## 9.i Let's look at the imputed to the non-imputed data to see how the distributions compare using the function stripplot that plots the values for the imputed data and complete data in "strips"
+
+-   x is the mids object,
+-   data specifies the formula to be plotted (variables on the y-axis by imputation number)
+-   pch gives the symbol to use
+-   jit = TRUE jitters overlapping points
+-   You should see that the imputed data is randomly distributed among the non-imputed data (red is imputed, blue is not imputed)
+-   If not, one reason may be an error in the model that was used to impute a specific variable
+
+```{r}
+stripplot(x = imp, data = Age + Sex + Class + Allowance + Friendwhosmokes + Seenantismokingad + Seenprosmokingcontent ~.imp, jit=TRUE,  pch=c(1,20),  xlab="Blue = Non-missing, Imputation number", layout = c(4,1)) 
+
+```
+
+### Results
+
+### 9.j Analysis of imputed data using a multinom regression model
+
+-   The below model is for the Tobacco_data4 dataframe that has missing values
+
+#### Chi-square test of independence
+
+```{r}
+
+# Risk of tobacco use 1:
+
+# List of predictors
+predictors <- c("Age", "Class", "Allowance", "Friendwhosmokes", "Parentwhosmoke", "Seenantismokingad", "Seenprosmokingcontent")
+
+# Outcome variable 
+outcome <- "Riskoftobaccouse1"
+
+# Loop through each predictor and run a Chi-square test
+for (predictor in predictors) {
+  cat("\nChi-square test between", predictor, "and", outcome, ":\n")
+  table_Tobacco_data4 <- table(Tobacco_data4[[predictor]], Tobacco_data4[[outcome]])  # Create a contingency table
+  chi_test <- chisq.test(table_Tobacco_data4)                        # Run the Chi-square test
+  print(chi_test)                                           # Print the results
+}
+
+# Risk of tobacco use 2:
+
+# List of predictors
+predictors <- c("Age", "Class", "Allowance", "Friendwhosmokes", "Parentwhosmoke", "Seenantismokingad", "Seenprosmokingcontent")
+
+# Outcome variable 
+outcome <- "Riskoftobaccouse2"
+
+# Loop through each predictor and run a Chi-square test
+for (predictor in predictors) {
+  cat("\nChi-square test between", predictor, "and", outcome, ":\n")
+  table_Tobacco_data4 <- table(Tobacco_data4[[predictor]], Tobacco_data4[[outcome]])  # Create a contingency table
+  chi_test2 <- chisq.test(table_Tobacco_data4)                        # Run the Chi-square test
+  print(chi_test2)                                           # Print the results
+}
+
+```
+
+## Assessing multicollinearity:
+
+```{r}
+
+library(car)
+
+# Fit the logistic regression model for Riskoftobaccouse1
+model <- glm(Riskoftobaccouse1 ~ Age + Friendwhosmokes + Parentwhosmoke,
+             data = Tobacco_data4, family = binomial)
+
+# Calculate VIF values
+vif_values <- vif(model)
+
+# Print VIF values
+print(vif_values)
+
+# Fit the logistic regression model for Riskoftobaccouse2
+model1 <- glm(Riskoftobaccouse2 ~ Friendwhosmokes + Seenantismokingad ,
+             data = Tobacco_data4, family = binomial)
+
+# Calculate VIF values
+vif_values1 <- vif(model1)
+
+# Print VIF values
+print(vif_values1)
+
+```
+
+#### Unadjusted Multinom regression for Riskoftobaccouse1 for dataset with missing values:
+```{r}
+# Load the broom package for logistic regression
+library(broom)
+
+# Fit the logistic regression model
+model <- glm(Riskoftobaccouse1 ~ Sex, data = Tobacco_data4, family = binomial)
+
+# Get the summary of the model
+model_summary <- summary(model)
+
+# View the summary
+print(model_summary)
+
+# Extract coefficients, odds ratios, and confidence intervals using tidy()
+model_tidy <- tidy(model, conf.int = TRUE, exponentiate = TRUE)
+
+# View the tidy results
+print(model_tidy)
+```
+
+## Unadjusted Multinom regression for Riskoftobaccouse2 for dataset with missing values:
+
+```{r}
+
+# Fit the logistic regression model
+model2 <- glm(Riskoftobaccouse2 ~ Sex, data = Tobacco_data4, family = binomial)
+
+# Get the summary of the model
+model_summary2 <- summary(model2)
+
+# View the summary
+print(model_summary2)
+
+# Extract coefficients, odds ratios, and confidence intervals using tidy()
+model_tidy2 <- tidy(model2, conf.int = TRUE, exponentiate = TRUE)
+
+# View the tidy results
+print(model_tidy2)
+```
+
+## Adjusted model Riskoftobaccouse1:
+
+```{r}
+
+# Fit the logistic regression model
+model2 <- glm(Riskoftobaccouse1 ~ Sex + Age + Friendwhosmokes + Parentwhosmoke, data = Tobacco_data4, family = binomial)
+
+# View the summary of the model
+summary(model2)
+
+# Extract coefficients, exponentiate, and include confidence intervals
+model2_tidy <- tidy(model2, conf.int = TRUE, exponentiate = TRUE)
+
+# View the tidy results
+print(model2_tidy)
+
+```
+
+## Adjusted model Riskoftobaccouse2:
+
+```{r}
+
+# Fit the logistic regression model
+model3 <- glm(Riskoftobaccouse2 ~ Sex + Friendwhosmokes + Seenantismokingad, data = Tobacco_data4, family = binomial)
+
+# View the summary of the model
+summary(model3)
+
+# Extract coefficients, exponentiate, and include confidence intervals
+model3_tidy <- tidy(model3, conf.int = TRUE, exponentiate = TRUE)
+
+# View the tidy results
+print(model3_tidy)
+
+```
+
+## 9.j Get regression coefficients for all models using the *with* function from the mice package. Recall there will be 10 sets of regression coefficients and 10 intercepts because there are 10 imputed datasets in imp. Pool(fit) \# pool regression coefficients and standard errors using pool function. All the statistics can be interpreted.
+
+```{r}
+
+## Outcome: #Riskoftobaccouse1
+
+# Fit the multinomial model on each imputed dataset
+fit_i <- with(imp, glm(Riskoftobaccouse1 ~ Sex + Age + Friendwhosmokes + Parentwhosmoke, data = Tobacco_data4, family = binomial))
+
+# Pool the results from the imputed models
+pooled_results <- pool(fit_i)
+
+# Get a summary of the pooled results
+pooled_summary <- summary(pooled_results)
+
+# Manually calculate 95% confidence intervals and exponentiate to get odds ratios
+pooled_summary$conf.low <- pooled_summary$estimate - 1.96 * pooled_summary$std.error
+pooled_summary$conf.high <- pooled_summary$estimate + 1.96 * pooled_summary$std.error
+pooled_summary$OR <- exp(pooled_summary$estimate)
+pooled_summary$conf.low <- exp(pooled_summary$conf.low)
+pooled_summary$conf.high <- exp(pooled_summary$conf.high)
+
+# Create a final data frame with relevant columns for interpretation
+
+final_summary <- pooled_summary[, c("term", "OR", "conf.low", "conf.high", "p.value")]
+
+# View the final summary
+print(final_summary)
+
+library(openxlsx)
+write.xlsx(final_summary, "Imputated Risk of Tobacco use 1.xlsx")
+```
+
+
+```{r}
+
+## Outcome: #Riskoftobaccouse2
+
+# Fit the multinomial model on each imputed dataset
+fit_i1 <- with(imp, glm(Riskoftobaccouse2 ~ Sex + Friendwhosmokes + Seenantismokingad, data = Tobacco_data4, family = binomial))
+
+# Pool the results from the imputed models
+pooled_results1 <- pool(fit_i1)
+
+# Get a summary of the pooled results
+pooled_summary1 <- summary(pooled_results1)
+
+# Manually calculate 95% confidence intervals and exponentiate to get odds ratios
+pooled_summary1$conf.low <- pooled_summary1$estimate - 1.96 * pooled_summary1$std.error
+pooled_summary1$conf.high <- pooled_summary1$estimate + 1.96 * pooled_summary1$std.error
+pooled_summary1$OR <- exp(pooled_summary1$estimate)
+pooled_summary1$conf.low <- exp(pooled_summary1$conf.low)
+pooled_summary1$conf.high <- exp(pooled_summary1$conf.high)
+
+# Create a final data frame with relevant columns for interpretation
+
+final_summary1 <- pooled_summary1[, c("term", "OR", "conf.low", "conf.high", "p.value")]
+
+# View the final summary
+print(final_summary1)
+
+library(openxlsx)
+write.xlsx(final_summary1, "Imputated Risk of Tobacco use 2.xlsx")
+
+```
+
+
+# 10. Generating table1
+
+```{r}
+
+# Create the tables without missing data (using the imputated dataset)
+
+table1(~ Age + Class + Allowance + Friendwhosmokes + Parentwhosmoke + Seenantismokingad + Seenprosmokingcontent + Riskoftobaccouse1 + Riskoftobaccouse2 | Sex, data = imp1)
+
+```
+
+# 11. Graphs
+
+```{r arrangingPlots, message=FALSE}
+
+# install.packages("ggpubr")
+library(ggpubr)
+
+# Use this code to see how your variable(Sex) is coded in the imp1 dataset
+unique(imp1$Sex)
+
+# First, create your plots! If you want to have a single legend for every plot (ex: the colors are the same for all plots), then make sure your plots are coded accordingly. Then, ggarrange
+
+# plot A - scatter plot
+plotA <- ggplot(data = imp1) + 
+  geom_bar(position = "dodge", aes(x = Age, fill = Sex)) +  # fill and dodge work together here
+  scale_fill_manual(values = c("M" = "blue", "F" = "grey")) +  # custom colors for Sex
+  labs(title = "Participant distribution by age and sex", x = "Age", y = "Count") +  # proper axis labels
+  theme_minimal()  # minimal theme for clean look
+plotA
+
+# plot B - histogram
+plotB <- ggplot(data = imp1) + 
+  geom_bar(position = "dodge", aes(x = Riskoftobaccouse1, fill = Sex)) + 
+  scale_fill_manual(values = c("M" = "blue", "F" = "pink")) +
+  labs(title = "Risk of Tobacco Use 1 by Sex", x = "If one of your best friends offered you a tobacco product, would you use it?", y = "Count") +
+  theme_minimal()
+plotB
+
+# plot C - box plot
+plotC <- ggplot(data = imp1) + 
+  geom_bar(position = "dodge", aes(x = Riskoftobaccouse2, fill = Sex)) + 
+  scale_fill_manual(values = c("M" = "green", "F" = "black")) +
+  labs(title = "Risk of Tobacco Use 2 by Sex", x = "At anytime during the next 12 months do you think you will use any form of tobacco?", y = "Count") +
+  theme_minimal()
+plotC
+
+# Second, ggarrange
+combined_plot <- ggarrange(plotA, plotB, plotC, nrow = 2, ncol = 2, 
+          common.legend = FALSE, 
+          labels = c("A", "B", "C"), legend = "bottom")
+# print the combined plot
+combined_plot
+```
+
+## Conclusion:
