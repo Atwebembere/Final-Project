@@ -43,7 +43,7 @@ car: For regression diagnostics.
   
   bash
 Copy code
-git clone https://github.com/yourusername/project-name.git
+git clone https://github.com/Atwebembere/Final-Project.git
 Open the analysis.Rmd file in RStudio.
 
 Run the .Rmd file:
